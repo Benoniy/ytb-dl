@@ -27,7 +27,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <TextBox x:Name="textBoxOut" HorizontalAlignment="Left" Height="23" Margin="298,446,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="379" LostFocus="textBoxUrl_LostFocus" GotFocus="textBoxUrl_GotFocus"/>
+        <TextBox x:Name="textBoxOut" HorizontalAlignment="Left" Height="23" Margin="298,446,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="271" LostFocus="textBoxUrl_LostFocus" GotFocus="textBoxUrl_GotFocus"/>
         <ListBox x:Name="audListBox" HorizontalAlignment="Left" Height="166" Margin="298,254,0,0" VerticalAlignment="Top" Width="466" Style="{DynamicResource CheckBoxListBoxStyle}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -40,12 +40,12 @@
         <Label Content="Video Track: " HorizontalAlignment="Left" Margin="298,37,0,0" VerticalAlignment="Top" Height="26" Width="78"/>
         <Label Content="Audio Track:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="74" Margin="298,233,0,0"/>
         <Label Content="Output Location:" HorizontalAlignment="Left" Margin="298,420,0,0" VerticalAlignment="Top" Height="26" Width="99"/>
-        <Button x:Name="buttonDl" Content="Download" HorizontalAlignment="Left" Margin="689,448,0,0" VerticalAlignment="Top" Width="75" Click="buttonDl_Click" Height="20"/>
+        <Button x:Name="buttonDl" Content="Download" HorizontalAlignment="Left" Margin="204,448,0,0" VerticalAlignment="Top" Width="75" Click="buttonDl_Click" Height="20"/>
         <ListBox x:Name="listBoxJobs" HorizontalAlignment="Left" Height="358" VerticalAlignment="Top" Width="258" Margin="21,62,0,0" SelectionMode="Multiple"/>
         <Label Content="Jobs:" HorizontalAlignment="Left" Margin="21,37,0,0" VerticalAlignment="Top" Height="26" Width="36"/>
-        <Button x:Name="buttonAdd" Content="Add" HorizontalAlignment="Left" Margin="204,449,0,0" VerticalAlignment="Top" Width="75" Click="buttonAdd_Click" Height="20"/>
-        <Button x:Name="buttonRemove" Content="Remove" HorizontalAlignment="Left" Margin="124,449,0,0" VerticalAlignment="Top" Width="75" Click="buttonRemove_Click" Height="20"/>
-        <ProgressBar x:Name="progressBar1" HorizontalAlignment="Left" Height="23" Margin="19,14,0,0" VerticalAlignment="Top" Width="258"/>
-        <CheckBox x:Name="checkAudOnly" Content="Audio Only" HorizontalAlignment="Left" Margin="19,452,0,0" VerticalAlignment="Top" Checked="checkAudOnly_Checked" Unchecked="checkAudOnly_Unchecked" Height="15" Width="79"/>
+        <Button x:Name="buttonAdd" Content="Add" HorizontalAlignment="Left" Margin="689,448,0,0" VerticalAlignment="Top" Width="75" Click="buttonAdd_Click" Height="20"/>
+        <Button x:Name="buttonRemove" Content="Remove" HorizontalAlignment="Left" Margin="594,448,0,0" VerticalAlignment="Top" Width="75" Click="buttonRemove_Click" Height="20"/>
+        <ProgressBar x:Name="progressBar1" HorizontalAlignment="Left" Height="24" Margin="21,446,0,0" VerticalAlignment="Top" Width="169"/>
+        <CheckBox x:Name="checkAudOnly" Content="Convert to mp3" HorizontalAlignment="Left" Margin="21,18,0,0" VerticalAlignment="Top" Checked="checkAudOnly_Checked" Unchecked="checkAudOnly_Unchecked" Height="14" Width="258"/>
     </Grid>
 </Window>

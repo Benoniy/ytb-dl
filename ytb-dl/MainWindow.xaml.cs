@@ -168,7 +168,7 @@ namespace ytb_dl
             listBoxJobs.Items.Clear();
             foreach (string[] s in Constants.jobs)
             {
-                listBoxJobs.Items.Add(s[4]);
+                listBoxJobs.Items.Add(s[6]);
             }
             Constants.totaljobs = Constants.jobs.Count();
         }
@@ -277,7 +277,7 @@ namespace ytb_dl
                 path += "\\";
             }
 
-            string[] arg = new string[] { jobVid[0], jobVid[1], jobAud[0], jobAud[1], Constants.link, path, title, checkAudOnly.IsChecked.ToString() };
+            string[] arg = new string[] { jobVid[0], jobVid[1], jobAud[0], jobAud[1], Constants.link, path, title.Replace("\n", ""), checkAudOnly.IsChecked.ToString() };
 
             Constants.jobs.Add(arg);
             updateJobList();
@@ -292,7 +292,7 @@ namespace ytb_dl
             {
                 foreach (string[] arg in Constants.jobs.ToList())
                 {
-                    if (arg[4] == item)
+                    if (arg[6] == item)
                     {
                         Constants.jobs.Remove(arg);
                     }
