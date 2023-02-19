@@ -24,6 +24,7 @@ namespace ytb_dl
     /// </summary>
     public partial class MainWindow : Window
     {
+        // Initializes the window and sets up some default values
         public MainWindow()
         {
             InitializeComponent();
@@ -39,6 +40,7 @@ namespace ytb_dl
             progressBar1.Maximum = 1;
         }
 
+        // Setup and return a process object for command line execution
         private Process setupProcess()
         {
             var process = new Process();
@@ -51,19 +53,17 @@ namespace ytb_dl
             return process;
         }
 
+        // Retrieve the details of a given url and generate a string array containing them
         private async Task<string[]> getDetailsAsync(string url)
         {
             using (var process = setupProcess())
             {
-                
-                
-
                 process.StartInfo.FileName = "cmd.exe";
                 process.StartInfo.Arguments = @"/c yt-dlp -F " + url;
-
                 process.Start();
 
                 string strOutput = await process.StandardOutput.ReadToEndAsync();
+                
                 process.WaitForExit();
 
                 string[] result = strOutput.Split('\n');
@@ -72,7 +72,7 @@ namespace ytb_dl
             }
         }
 
-
+        // Get the title of a video at a given url
         private async Task<string> getTitle(string url)
         {
             using (var process = setupProcess())
@@ -88,6 +88,8 @@ namespace ytb_dl
             }
         }
 
+
+        // Run any command line command provided (Not useful if output is required)
         private async Task<int> runCommand(string command)
         {
             using (var process = setupProcess())
@@ -124,6 +126,7 @@ namespace ytb_dl
             }
         }
 
+        // Convert a file that has been produced via a job into an mp3 file using ffmpeg
         private async Task<int> convertToMP3(string[] arg)
         {
             string outputFilename = $"{arg[5]}{arg[6]}({arg[2]}).mp3";
@@ -132,6 +135,8 @@ namespace ytb_dl
             command = command.Replace("\n", "");
             return await runCommand(command);
         }
+
+        // Run a job that exists in the jobs constant
         private async Task<int> runJob(string[] arg)
         {
 
@@ -157,6 +162,7 @@ namespace ytb_dl
             
         }
 
+        // Update the jobs ListBox to reflect the real state of the jobs constant
         private void updateJobList()
         {
             listBoxJobs.Items.Clear();
@@ -167,6 +173,7 @@ namespace ytb_dl
             Constants.totaljobs = Constants.jobs.Count();
         }
 
+        // Sanatizes a given string removing clutter
         private string sanatizeDetails(string input)
         {
             string s = Regex.Replace(input, @"\s+", " ");
@@ -175,24 +182,29 @@ namespace ytb_dl
             return s;
         }
 
+        // Creates "ghosted" text in a given box
         private void textBox_CreatGhost(TextBox tb, string text)
         {
 
-            if (string.IsNullOrWhiteSpace(textBoxUrl.Text))
+            if (string.IsNullOrWhiteSpace(tb.Text))
             {
-                textBoxUrl.Text = text;
-                textBoxUrl.Foreground = Brushes.Gray;
+                tb.Text = text;
+                tb.Foreground = Brushes.Gray;
             }
             
         }
+
+        // Erased "ghosted" text from a given box
         private void textBox_EraseGhost(TextBox tb, string text)
         {
-            if (textBoxUrl.Text == text)
+            if (tb.Text == text)
             {
-                textBoxUrl.Text = "";
-                textBoxUrl.Foreground = Brushes.Black;
+                tb.Text = "";
+                tb.Foreground = Brushes.Black;
             }
         }
+
+        // Handles ghosted text for text boxes
         private void textBoxUrl_GotFocus(object sender, RoutedEventArgs e)
         {
             textBox_EraseGhost(textBoxUrl, "Paste YouTube Link...");
@@ -201,6 +213,8 @@ namespace ytb_dl
         {
             textBox_CreatGhost(textBoxUrl, "Paste YouTube Link...");
         }
+
+        // Toggle whether the user is allowed to change values
         private void toggleInput(bool state)
         {
             buttonDl.IsEnabled = state;
@@ -213,6 +227,7 @@ namespace ytb_dl
             textBoxUrl.IsEnabled = state;
         }
 
+        // Handles the Check Link button, gets the url information and then adds format options to the video and audio format lists so a user can select them
         private async void buttonCheck_Click(object sender, RoutedEventArgs e)
         {
             Constants.checkedListBoxVid.Clear();
@@ -247,6 +262,7 @@ namespace ytb_dl
             }
         }
 
+        // Handles the Add button, using the selected video and audio format this constructs a 'job' and adds it to the jobs constant
         private async void buttonAdd_Click(object sender, RoutedEventArgs e)
         {
             string checkedVid = Constants.checkedListBoxVid.FirstOrDefault(item => item.IsChecked).Name;
@@ -267,6 +283,7 @@ namespace ytb_dl
             updateJobList();
         }
 
+        // Handles the Remove button, removes any user selected item in the jobs list box from the jobs constant
         private void buttonRemove_Click(object sender, RoutedEventArgs e)
         {
             IList selectedItems = listBoxJobs.SelectedItems;
@@ -286,6 +303,7 @@ namespace ytb_dl
             updateJobList();
         }
 
+        // Handles the Download button, recurses through the jobs constant calling the runJob method for each job. It also records total progress and prompts the user when all jobs are complete.
         private async void buttonDl_Click(object sender, RoutedEventArgs e)
         {
             toggleInput(false);
@@ -308,11 +326,13 @@ namespace ytb_dl
             progressBar1.Value = 0;
         }
 
+        // Disables the Video Format box if audio only is enabled
         private void checkAudOnly_Checked(object sender, RoutedEventArgs e)
         {
             vidListBox.IsEnabled = false;
         }
 
+        // Enables the Video Format box if audio only is enabled
         private void checkAudOnly_Unchecked(object sender, RoutedEventArgs e)
         {
             vidListBox.IsEnabled = true;
